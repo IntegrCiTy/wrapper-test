@@ -65,7 +65,7 @@ class Wrapper(Node):
             self.send('', 'db.data.init', fwd.SerializeToString(),
                       reply_to='coside.cosim.simu.' + SimulationBlock.Name(dr.block) + '.' + self.name)
 
-        elif m.details.Is(OTHER.DESCRIPTOR):
+        elif m.details.Is(TEST_A.DESCRIPTOR) or m.details.Is(TEST_B.DESCRIPTOR) or m.details.Is(TEST_C.DESCRIPTOR):
             tni = TestNodeInfo()
             Node.LOGGER.debug("receive " + str(type(tni)))
             m.details.Unpack(tni)
@@ -102,6 +102,9 @@ class Wrapper(Node):
 
 if __name__ == "__main__":
     Node.activate_console_logging(logging.DEBUG)
+
+    print(sys.argv[1])
+    print(sys.argv[2])
 
     input_attr = json.loads(sys.argv[1])
     output_attr = json.loads(sys.argv[2])
