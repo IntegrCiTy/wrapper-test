@@ -65,7 +65,7 @@ class Wrapper(Node):
             self.send('', 'db.data.init', fwd.SerializeToString(),
                       reply_to='coside.cosim.simu.' + SimulationBlock.Name(dr.block) + '.' + self.name)
 
-        elif m.details.Is(TEST_A.DESCRIPTOR) or m.details.Is(TEST_B.DESCRIPTOR) or m.details.Is(TEST_C.DESCRIPTOR):
+        elif m.details.Is(TestNodeInfo.DESCRIPTOR):
             tni = TestNodeInfo()
             Node.LOGGER.debug("receive " + str(type(tni)))
             m.details.Unpack(tni)
