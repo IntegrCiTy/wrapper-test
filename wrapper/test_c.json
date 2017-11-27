@@ -1,0 +1,7 @@
+{
+  "name": "test_c",
+  "queues": {
+    "coside.cosim.simu.TEST_C": "on_block",
+    "coside.cosim.simu.TEST_C.": "on_block"
+  }
+}
