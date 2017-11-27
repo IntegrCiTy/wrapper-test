@@ -38,9 +38,10 @@ class ClientTestNode(ClientNode):
 
 
 class Wrapper(Node):
-    def __init__(self, host, vhost, username, password, config_file,
+    def __init__(self, host, vhost, username, password, config_file, obnl_file,
                  input_attr, output_attr):
         super().__init__(host, vhost, username, password, config_file)
+        self._obnl_file= obnl_file
 
         self._input_attr = input_attr
         self._output_attr = output_attr
@@ -73,7 +74,7 @@ class Wrapper(Node):
                                      vhost='obnl_vhost',
                                      username='obnl',
                                      password='obnl',
-                                     config_file="wrapper/obnl_a.json",
+                                     config_file=self._obnl_file,
                                      api=self,
                                      data=tni.values,
                                      input_attributes=self._input_attr,
@@ -108,6 +109,6 @@ if __name__ == "__main__":
     input_attr = json.loads(sys.argv[1])
     output_attr = json.loads(sys.argv[2])
 
-    w = Wrapper("172.17.0.1", "backend_vhost", "tool", "tool", sys.argv[3],
+    w = Wrapper("172.17.0.1", "backend_vhost", "tool", "tool", sys.argv[3], sys.argv[4],
                 input_attr, output_attr)
     w.start()
