@@ -2,6 +2,7 @@
   "name": "test_b",
   "queues": {
     "coside.cosim.simu.TEST_B": "on_block",
-    "coside.cosim.simu.TEST_B.": "on_block"
+    "coside.cosim.simu.TEST_B.": "on_block",
+    "wrapper.local.": "on_local"
   }
 }
