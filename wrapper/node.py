@@ -31,9 +31,10 @@ class ClientTestNode(ClientNode):
         print(self.name, self.input_values)
 
         for o in self.output_attributes:
-            rv = self._data[0 % len(self._data)]
+            rv = self._data[self._i % len(self._data)]
             print(self.name, o, ':', rv)
             self.update_attribute(o, rv)
+            self._i += 1
         print('=============')
 
 
@@ -102,9 +103,6 @@ class Wrapper(Node):
 
 if __name__ == "__main__":
     Node.activate_console_logging(logging.DEBUG)
-
-    print(sys.argv[1])
-    print(sys.argv[2])
 
     input_attr = json.loads(sys.argv[1])
     output_attr = json.loads(sys.argv[2])
