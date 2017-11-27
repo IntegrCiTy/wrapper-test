@@ -33,6 +33,21 @@ class ClientTestNode(ClientNode):
         for o in self.output_attributes:
             rv = self._data[self._i % len(self._data)]
             print(self.name, o, ':', rv)
+
+            m = MetaMessage()
+            m.node_name = self.name
+
+            sd = StoreData()
+            sd.simulation_id = self.simulation
+            sd.node_id = self.name
+            sd.timestep = current_time
+
+            sd.attribute_name = o
+            sd.value = rv
+            m.details.Pack(sd)
+
+            self._api.add_message(m)
+
             self.update_attribute(o, rv)
             self._i += 1
         print('=============')
