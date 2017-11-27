@@ -1,4 +1,5 @@
 {
+  "name": "test_a",
   "queues": {
     "obnl.simulation.node.": "on_simulation",
     "obnl.local.node.": "on_local",
