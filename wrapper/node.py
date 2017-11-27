@@ -16,11 +16,13 @@ from ict.protobuf.default_pb2 import MetaMessage
 class ClientTestNode(ClientNode):
 
     def __init__(self, host, vhost, username, password, config_file,
-                 api, data,
+                 api, data, name = None,
                  input_attributes=None, output_attributes=None, is_first=False):
         super().__init__(host, vhost, username, password, config_file,
                          input_attributes, output_attributes, is_first)
         self._node_impl.activate_console_logging(logging.DEBUG)
+        if name:
+            self._node_impl._name = name
         self._api = api
         self._data = data
         self._i = 0
@@ -77,6 +79,7 @@ class Wrapper(Node):
                                      config_file="wrapper/default.json",
                                      api=self,
                                      data=tni.values,
+                                     name=self.name,
                                      input_attributes=self._input_attr,
                                      output_attributes=self._output_attr,
                                      is_first=True)
