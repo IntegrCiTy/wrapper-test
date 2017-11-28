@@ -7,9 +7,8 @@ from obnl.core.client import ClientNode
 
 from ict.connection.node import Node
 
-from ict.protobuf.backend.simulation_pb2 import *
-from ict.protobuf.backend.db_pb2 import *
-from ict.protobuf.backend.test_pb2 import *
+from ict.protobuf.simulation_pb2 import *
+from ict.protobuf.db_pb2 import *
 from ict.protobuf.default_pb2 import MetaMessage
 
 
@@ -76,15 +75,16 @@ class Wrapper(Node):
             fwd = MetaMessage()
             fwd.node_name = self._name
 
+            dr.stored_data.append("values")
             fwd.details.Pack(dr)
 
             self.send('', 'db.data.init', fwd.SerializeToString(),
                       reply_to='coside.cosim.simu.' + SimulationBlock.Name(dr.block) + '.' + self.name)
 
-        elif m.details.Is(TestNodeInfo.DESCRIPTOR):
-            tni = TestNodeInfo()
-            Node.LOGGER.debug("receive " + str(type(tni)))
-            m.details.Unpack(tni)
+        elif m.details.Is(InitInfo.DESCRIPTOR):
+            ii = InitInfo()
+            Node.LOGGER.debug("receive " + str(type(ii)))
+            m.details.Unpack(ii)
 
             pn_node = ClientTestNode(host=self.host,
                                      vhost='obnl_vhost',
@@ -92,7 +92,7 @@ class Wrapper(Node):
                                      password='obnl',
                                      config_file=self._obnl_file,
                                      api=self,
-                                     data=tni.values,
+                                     data=ii.data_values['values'],
                                      input_attributes=self._input_attr,
                                      output_attributes=self._output_attr,
                                      is_first=True)
