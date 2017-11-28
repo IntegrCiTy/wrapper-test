@@ -9,7 +9,7 @@ from ict.connection.node import Node
 
 from ict.protobuf.simulation_pb2 import *
 from ict.protobuf.db_pb2 import *
-from ict.protobuf.default_pb2 import MetaMessage
+from ict.protobuf.core_pb2 import MetaMessage
 
 
 class ClientTestNode(ClientNode):
