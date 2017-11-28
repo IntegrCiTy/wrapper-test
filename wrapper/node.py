@@ -92,7 +92,7 @@ class Wrapper(Node):
                                      password='obnl',
                                      config_file=self._obnl_file,
                                      api=self,
-                                     data=ii.data_values['values'],
+                                     data=ii.arrays['values'].values,
                                      input_attributes=self._input_attr,
                                      output_attributes=self._output_attr,
                                      is_first=True)
